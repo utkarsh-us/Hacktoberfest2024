@@ -1,24 +1,18 @@
 def sum_unique_elements(lst):
-    # Bug 1: Doesn't handle empty list properly (no default return)
+    if not lst:
+        return 0
     
-    # Bug 2: Using list instead of set, which is inefficient and might miss duplicates
-    unique = []
+    unique_elements = set()
+    total_sum = 0
     for i in lst:
-        if not i in unique:
-            unique.append(i)
+        if isinstance(i, (int, float)) and i not in unique_elements:
+            unique_elements.add(i)
+            total_sum += i
     
-    # Bug 3: Doesn't handle non-numeric elements
-    sum = 0
-    for num in unique:
-        sum = sum + num
-    
-    # Bug 4: Name conflict with built-in 'sum' function
-    return sum
+    return total_sum
 
-# Example usage with bugs
 test_list = [1, 2, 2, 3, 3, 3, 'a', 4]
-print(sum_unique_elements(test_list))  # Will crash when it hits 'a'
+print(sum_unique_elements(test_list))
 
-# Bug 5: These edge cases aren't handled:
-print(sum_unique_elements([]))  # Will run but gives no explicit return for empty list
-print(sum_unique_elements([None, 1, 2]))  # Will crash on None
+print(sum_unique_elements([]))
+print(sum_unique_elements([None, 1, 2]))
