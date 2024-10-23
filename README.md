@@ -1,5 +1,3 @@
-Here’s a `README.md` file tailored for a Hacktoberfest-themed repository:
-
 ```markdown
 # Hacktoberfest Challenge Repository 🎃
 
