@@ -1,29 +1,40 @@
-def longest_substring(s):
+def longest_substring_without_repeating_characters(s):
     """
     Returns the length of the longest substring without repeating characters.
+
+    Parameters:
+    s (str): The input string to search.
+
+    Returns:
+    int: The length of the longest substring without repeating characters.
     """
-    max_len = 0
+    # Edge case: If the string is empty, return 0
+    if not s:
+        return 0
+    
+    max_length = 0
     start = 0
-    char_index = {}
+    last_seen = {}
 
-    for i in range(len(s)):
-        # Check if the character was seen before and is within the current substring
-        if s[i] in char_index and char_index[s[i]] >= start:
-            # Move the start index to the right of the last occurrence of the character
-            start = char_index[s[i]] + 1  # Fixed: Should be char_index[s[i]] + 1
+    # Iterate over each character in the string
+    for i, char in enumerate(s):
+        # If the character has been seen and its index is within the current window
+        if char in last_seen and last_seen[char] >= start:
+            # Update the start of the window to be after the last occurrence of the character
+            start = last_seen[char] + 1
 
-        # Update the last index of the character
-        char_index[s[i]] = i
+        # Update the last seen index of the character
+        last_seen[char] = i
 
-        # Correctly calculate the length of the current substring
-        current_len = i - start + 1  # Fixed: Should be i - start + 1
-        max_len = max(max_len, current_len)
+        # Calculate the length of the current substring
+        current_length = i - start + 1
+        max_length = max(max_length, current_length)
 
-    return max_len
+    return max_length
 
 # Test cases
-print(longest_substring("abcabcbb"))  # Output: 3 (The substring is "abc")
-print(longest_substring("bbbbb"))     # Output: 1 (The substring is "b")
-print(longest_substring("pwwkew"))    # Output: 3 (The substring is "wke")
-print(longest_substring(""))           # Output: 0 (Empty string case)
-print(longest_substring(" "))          # Output: 1 (Single space character)
+print(longest_substring_without_repeating_characters("abcabcbb"))  # Output: 3 ("abc")
+print(longest_substring_without_repeating_characters("bbbbb"))     # Output: 1 ("b")
+print(longest_substring_without_repeating_characters("pwwkew"))    # Output: 3 ("wke")
+print(longest_substring_without_repeating_characters(""))          # Output: 0 (empty string)
+print(longest_substring_without_repeating_characters(" "))         # Output: 1 (" ")
