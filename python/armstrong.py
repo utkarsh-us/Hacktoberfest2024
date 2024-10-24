@@ -1,22 +1,44 @@
-# Function to check if a number is an Armstrong number
-def is_armstrong(num):
-    # Convert the number to a string to find the number of digits
-    num_str = str(num)
-    n = len(num_str)
+def is_armstrong(number):
+    """
+    Check if the given number is an Armstrong number.
 
-    # Calculate the sum of each digit raised to the power of n
-    result = sum(int(digit) ** n for digit in num_str)
+    An Armstrong number for an n-digit number is a number that equals the sum
+    of its digits raised to the power of n.
 
-    # Check if the result is equal to the original number
-    return result == num
+    Parameters:
+    number (int): The number to check.
 
-# Main function
+    Returns:
+    bool: True if the number is an Armstrong number, False otherwise.
+    """
+    # Ensure the number is non-negative
+    if number < 0:
+        return False
+
+    # Get the number of digits
+    n = len(str(number))
+    
+    # Calculate the sum of digits each raised to the power of n
+    result = sum(int(digit) ** n for digit in str(number))
+    
+    return result == number
+
+def main():
+    """
+    Main function to take user input and check if the number is an Armstrong number.
+    """
+    try:
+        # Take input from the user
+        number = int(input("Enter a positive integer: "))
+
+        # Check if the number is an Armstrong number
+        if is_armstrong(number):
+            print(f"{number} is an Armstrong number.")
+        else:
+            print(f"{number} is not an Armstrong number.")
+    
+    except ValueError:
+        print("Please enter a valid integer.")
+
 if __name__ == "__main__":
-    # Take input from the user
-    number = int(input("Enter a number: "))
-
-    # Check if the number is an Armstrong number
-    if is_armstrong(number):
-        print(f"{number} is an Armstrong number.")
-    else:
-        print(f"{number} is not an Armstrong number.")
+    main()
